@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acharya Pandit Satyendra Dwivedi | Vedic Astrology & Vastu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --deep-purple: #1a0b2e;
+            --glass: rgba(255, 255, 255, 0.05);
+            --text-main: #f1f1f1;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top, #2d1b4e, #0a0a0c);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        header {
+            width: 100%;
+            padding: 15px 5%;
+            background: rgba(10, 10, 12, 0.95);
+            border-bottom: 1px solid var(--gold);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0; z-index: 1000;
+            backdrop-filter: blur(15px);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .lang-toggle {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 15px;
+            cursor: pointer;
+            border-radius: 20px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .lang-toggle:hover { background: var(--gold); color: #000; }
+
+        /* Sidebar */
+        .contact-sidebar {
+            position: fixed;
+            right: -100%;
+            top: 0;
+            width: 350px;
+            max-width: 90%;
+            height: 100vh;
+            background: var(--deep-purple);
+            border-left: 2px solid var(--gold);
+            z-index: 2000;
+            padding: 80px 30px;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .contact-sidebar.active { right: 0; }
+
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1999;
+            display: none;
+        }
+
+        .sidebar-overlay.active { display: block; }
+
+        /* Sections */
+        section { padding: 100px 8%; }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+        }
+
+        .hero h2 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 6vw, 4rem); margin-bottom: 20px; color: #fff; }
+
+        .service-card {
+            background: var(--glass);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.4s;
+            margin-bottom: 20px;
+        }
+
+        .service-card:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.1); }
+
+        .details { display: none; margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(212, 175, 55, 0.3); color: #ddd; }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .review-card { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 15px; border-left: 4px solid var(--gold); }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #000;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .floating-wa {
+            position: fixed;
+            bottom: 80px;
+            right: 25px;
+            background: #25d366;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            text-decoration: none;
+            color: white; font-size: 30px;
+        }
+
+        .rating-strip {
+            background: var(--gold);
+            color: #000;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0; width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            z-index: 1000;
+            font-weight: bold;
+        }
+
+        .rating-content { display: inline-block; animation: scroll 25s linear infinite; }
+
+        @keyframes scroll { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <header>
+        <div class="logo">Acharya Pandit Satyendra Dwivedi</div>
+        <div>
+            <button class="lang-toggle" onclick="changeLang()">HI / EN</button>
+            <button class="btn-gold" style="margin-left: 10px;" id="btn-consult" onclick="toggleSidebar()">Consult Now</button>
+        </div>
+    </header>
+
+    <div class="contact-sidebar" id="sidebar">
+        <h2 id="side-title" style="color: var(--gold); font-family: 'Cinzel'; margin-bottom: 20px;">Contact Details</h2>
+        <div style="margin-top: 30px; line-height: 2.5;">
+            <p>📞 <strong id="side-phone">Phone:</strong> +91 9350281680</p>
+            <p>📧 <strong id="side-email">Email:</strong> panditsatyendra4@gmail.com</p>
+            <p>📍 <strong id="side-loc">Location:</strong> Gurugram, Haryana</p>
+        </div>
+        <button class="btn-gold" style="width: 100%; margin-top: 40px;" id="btn-close" onclick="toggleSidebar()">Close</button>
+    </div>
+
+    <a href="https://wa.me/919350281680" class="floating-wa">💬</a>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2 id="hero-title">Trust the Stars,<br>Define Your Destiny.</h2>
+            <p id="hero-sub" style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.8;">Expert Vedic Astrology Guidance with 20+ Years of Mastery.</p>
+            <button class="btn-gold" id="hero-btn" onclick="toggleSidebar()">Book Your Session</button>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 id="serv-head" style="text-align: center; font-family: 'Cinzel'; color: var(--gold); margin-bottom: 50px;">Divine Services</h2>
+        
+        <div class="service-card" onclick="toggleDetails(this)">
+            <h3 id="s1-t">Kundli Analysis (कुंडली विश्लेषण)</h3>
+            <p id="s1-p">Detailed study of your birth chart.</p>
+            <div class="details">
+                <strong id="s1-h">Why is it necessary?</strong>
+                <ul id="s1-l" style="margin-left: 20px; margin-top: 10px;">
+                    <li>To understand your true potential and career path.</li>
+                    <li>To find remedies for upcoming life obstacles.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="toggleDetails(this)">
+            <h3 id="s2-t">Match Making (गुण मिलan)</h3>
+            <p id="s2-p">Ensuring a compatible and happy marriage.</p>
+            <div class="details">
+                <strong id="s2-h">Why is it necessary?</strong>
+                <ul id="s2-l" style="margin-left: 20px; margin-top: 10px;">
+                    <li>To check emotional and mental compatibility between partners.</li>
+                    <li>To analyze future prosperity and family growth.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="service-card" onclick="toggleDetails(this)">
+            <h3 id="s3-t">Vastu Shastra (वास्तु शास्त्र)</h3>
+            <p id="s3-p">Balancing energies in your living space.</p>
+            <div class="details">
+                <strong id="s3-h">Why is it necessary?</strong>
+                <ul id="s3-l" style="margin-left: 20px; margin-top: 10px;">
+                    <li>To remove negative energy from home or office.</li>
+                    <li>To bring peace, health, and financial stability.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section style="background: rgba(0,0,0,0.2);">
+        <h2 id="rev-head" style="text-align: center; font-family: 'Cinzel'; color: var(--gold); margin-bottom: 40px;">Testimonials</h2>
+        <div class="reviews-grid" id="reviews-container">
+            </div>
+    </section>
+
+    <div class="rating-strip">
+        <div class="rating-content" id="strip-text">
+            ⭐ 5000+ Satisfied Clients | ⭐ 4.9/5 Average Rating | ⭐ 20+ Years of Experience | ⭐ Trusted Vedic Remedies
+        </div>
+    </div>
+
+    <footer style="padding: 100px 5% 80px; text-align: center; opacity: 0.5;">
+        <p>© 2026 Acharya Pandit Satyendra Dwivedi.</p>
+    </footer>
+
+    <script>
+        let currentLang = 'en';
+
+        const translations = {
+            en: {
+                consult: "Consult Now",
+                heroT: "Trust the Stars, Define Your Destiny.",
+                heroS: "Expert Vedic Astrology Guidance with 20+ Years of Mastery.",
+                heroB: "Book Your Session",
+                servH: "Divine Services",
+                s1t: "Kundli Analysis", s1p: "Detailed study of your birth chart.", s1h: "Why is it necessary?", s1l: "<li>To understand your true potential and career path.</li><li>To find remedies for upcoming life obstacles.</li>",
+                s2t: "Match Making", s2p: "Ensuring a compatible and happy marriage.", s2h: "Why is it necessary?", s2l: "<li>To check emotional and mental compatibility.</li><li>To analyze future prosperity and growth.</li>",
+                s3t: "Vastu Shastra", s3p: "Balancing energies in your living space.", s3h: "Why is it necessary?", s3l: "<li>To remove negative energy from home or office.</li><li>To bring peace, health, and financial stability.</li>",
+                revH: "Testimonials",
+                sideT: "Contact Details", sidePh: "Phone", sideEm: "Email", sideLo: "Location", close: "Close",
+                strip: "⭐ 5000+ Satisfied Clients | ⭐ 4.9/5 Average Rating | ⭐ 20+ Years of Experience | ⭐ Trusted Vedic Remedies",
+                reviews: [
+                    {p: "Pandit ji's guidance helped me secure my dream job. Highly recommended.", n: "Rajesh Kumar, Delhi"},
+                    {p: "The Vastu remedies were very practical and effective. My home feels peaceful now.", n: "Suman Lata, Gurugram"},
+                    {p: "Excellent marriage matching service. He explains the logic behind everything.", n: "Amit Sharma, Noida"}
+                ]
+            },
+            hi: {
+                consult: "परामर्श लें",
+                heroT: "सितारों पर भरोसा करें, अपना भाग्य बदलें।",
+                heroS: "20+ वर्षों के अनुभव के साथ विशेषज्ञ वैदिक ज्योतिष मार्गदर्शन।",
+                heroB: "अपना सत्र बुक करें",
+                servH: "दिव्य सेवाएँ",
+                s1t: "कुंडली विश्लेषण", s1p: "आपके जन्म चार्ट का विस्तृत अध्ययन।", s1h: "यह क्यों आवश्यक है?", s1l: "<li>अपनी वास्तविक क्षमता और करियर पथ को समझने के लिए।</li><li>आने वाली बाधाओं के समाधान खोजने के लिए।</li>",
+                s2t: "गुण मिलान", s2p: "सुखी वैवाहिक जीवन सुनिश्चित करना।", s2h: "यह क्यों आवश्यक है?", s2l: "<li>साझेदारों के बीच भावनात्मक और मानसिक अनुकूलता की जांच के लिए।</li><li>भविष्य की समृद्धि और परिवार वृद्धि के विश्लेषण के लिए।</li>",
+                s3t: "वास्तु शास्त्र", s3p: "अपने निवास स्थान में ऊर्जा को संतुलित करना।", s3h: "यह क्यों आवश्यक है?", s3l: "<li>घर या कार्यालय से नकारात्मक ऊर्जा को दूर करने के लिए।</li><li>शांति, स्वास्थ्य और आर्थिक स्थिरता लाने के लिए।</li>",
+                revH: "प्रशंसापत्र",
+                sideT: "संपर्क विवरण", sidePh: "फोन", sideEm: "ईमेल", sideLo: "स्थान", close: "बंद करें",
+                strip: "⭐ 5000+ संतुष्ट ग्राहक | ⭐ 4.9/5 औसत रेटिंग | ⭐ 20+ वर्षों का अनुभव | ⭐ विश्वसनीय वैदिक उपाय",
+                reviews: [
+                    {p: "पंडित जी के मार्गदर्शन से मुझे मेरी मनचाही नौकरी मिली। बहुत-बहुत धन्यवाद।", n: "राजेश कुमार, दिल्ली"},
+                    {p: "वास्तु उपाय बहुत ही व्यावहारिक और प्रभावी थे। अब घर में बहुत शांति है।", n: "सुमन लता, गुरुग्राम"},
+                    {p: "विवाह मिलान के लिए सर्वश्रेष्ठ सेवा। वह हर बात के पीछे का तर्क समझाते हैं।", n: "अमित शर्मा, नोएडा"}
+                ]
+            }
+        };
+
+        function changeLang() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            updateUI();
+        }
+
+        function updateUI() {
+            const t = translations[currentLang];
+            document.getElementById('btn-consult').innerText = t.consult;
+            document.getElementById('hero-title').innerText = t.heroT;
+            document.getElementById('hero-sub').innerText = t.heroS;
+            document.getElementById('hero-btn').innerText = t.heroB;
+            document.getElementById('serv-head').innerText = t.servH;
+            document.getElementById('s1-t').innerText = t.s1t; document.getElementById('s1-p').innerText = t.s1p; document.getElementById('s1-h').innerText = t.s1h; document.getElementById('s1-l').innerHTML = t.s1l;
+            document.getElementById('s2-t').innerText = t.s2t; document.getElementById('s2-p').innerText = t.s2p; document.getElementById('s2-h').innerText = t.s2h; document.getElementById('s2-l').innerHTML = t.s2l;
+            document.getElementById('s3-t').innerText = t.s3t; document.getElementById('s3-p').innerText = t.s3p; document.getElementById('s3-h').innerText = t.s3h; document.getElementById('s3-l').innerHTML = t.s3l;
+            document.getElementById('rev-head').innerText = t.revH;
+            document.getElementById('side-title').innerText = t.sideT;
+            document.getElementById('side-phone').innerText = t.sidePh;
+            document.getElementById('side-email').innerText = t.sideEm;
+            document.getElementById('side-loc').innerText = t.sideLo;
+            document.getElementById('btn-close').innerText = t.close;
+            document.getElementById('strip-text').innerText = t.strip;
+
+            const revCont = document.getElementById('reviews-container');
+            revCont.innerHTML = '';
+            t.reviews.forEach(r => {
+                revCont.innerHTML += `<div class="review-card"><p>"${r.p}"</p><h4>— ${r.n}</h4></div>`;
+            });
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function toggleDetails(card) {
+            const details = card.querySelector('.details');
+            details.style.display = (details.style.display === "block") ? "none" : "block";
+        }
+
+        updateUI(); // Initial Load
+    </script>
+</body>
+</html>d

@@ -247,23 +247,29 @@
             z-index: 2;
         }
 
-        .shlok-container {
-            background: linear-gradient(135deg, rgba(212,175,55,0.1), rgba(0,0,0,0));
-            border: 1px solid var(--glass-border);
-            padding: 40px;
-            border-radius: 20px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--glow);
+        /* === NEW DEITY IMAGE STYLES === */
+        .deity-image-container {
+            margin-bottom: 30px;
+            animation: float-deity 4s ease-in-out infinite;
         }
 
-        .shlok {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
-            color: var(--gold-light);
-            line-height: 1.8;
-            font-weight: 700;
-            text-shadow: 0 0 20px rgba(212,175,55,0.4);
+        .deity-image {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.5), inset 0 0 20px rgba(212, 175, 55, 0.2);
+            background: var(--glass-bg);
+            padding: 15px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        @keyframes float-deity {
+            0% { transform: translateY(0px); box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
+            50% { transform: translateY(-15px); box-shadow: 0 0 50px rgba(212, 175, 55, 0.7); }
+            100% { transform: translateY(0px); box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
         }
 
         .hero-title {
@@ -443,6 +449,7 @@
             .shlok { font-size: 1.2rem; }
             .contact-sidebar { width: 100%; right: -100%; }
             .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 1.5rem; }
+            .deity-image { width: 100px; height: 100px; }
         }
     </style>
 </head>
@@ -480,12 +487,10 @@
     <section class="hero">
         <div class="hero-om">ॐ</div>
         <div class="hero-content reveal">
-            <div class="shlok-container">
-                <div class="shlok">
-                    यथा शिखा मयूराणां नृत्यमध्ये गरीयसी।<br>
-                    तथा वेदेषु सर्वेषु न्यायशास्त्रं गरीयसम्।।
-                </div>
+            <div class="deity-image-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Ganesha_om.svg/512px-Ganesha_om.svg.png" alt="Lord Ganesha" class="deity-image">
             </div>
+
             <h1 class="hero-title">आचार्य पंडित सत्येंद्र द्विवेदी</h1>
             <p class="hero-sub">वैदिक ज्योतिष एवं वास्तु शास्त्र • 20+ वर्षों का प्रामाणिक अनुभव</p>
         </div>
